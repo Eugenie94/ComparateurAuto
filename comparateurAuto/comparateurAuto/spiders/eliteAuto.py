@@ -9,7 +9,7 @@ class EliteautoSpider(scrapy.Spider):
 
     def start_requests(self):
             # Définir les URLs de départ pour chaque page
-            base_url = "https://www.elite-auto.fr/occasion?p={}"
+            base_url = "https://www.elite-auto.fr/recherche?prod_ELITE_OFFERS%5Bpage%5D={}&prod_ELITE_OFFERS%5BrefinementList%5D%5Bcategory%5D%5B0%5D=1&prod_ELITE_OFFERS%5BsortBy%5D=prod_ELITE_OFFERS_occasion&prod_ELITE_OFFERS%5BhitsPerPage%5D=100"
             total_pages = 1000
 
             for page_number in range(1, total_pages + 1):
@@ -27,8 +27,8 @@ class EliteautoSpider(scrapy.Spider):
         # Itérer sur chaque article
         for article in articles:
             # Récupérer les données spécifiques de chaque article
-            brand = article.css("p.grow > ais-highlight:nth-child(1) > span.ais-Highlight::text").extract()
-            model = article.css("p.grow > ais-highlight:nth-child(2) > span.ais-Highlight::text").extract()
+            brand = article.css("p.grow > ais-highlight:nth-child(1) > span.ais-Highlight::text").get()
+            model = article.css("p.grow > ais-highlight:nth-child(2) > span.ais-Highlight::text").get()
             year = article.css("div.tw-moto-details > span:nth-child(1)::text").extract()
             mileage = article.css("div.tw-moto-details > span:nth-child(2)::text").extract()
             engine_type = article.css("div.tw-moto-details > span:nth-child(3)::text").extract()
@@ -46,4 +46,5 @@ class EliteautoSpider(scrapy.Spider):
             item["gearbox"] = gearbox
             item["price"] = price
             item["url"] = url
-            yield item
+            print(model)
+            # yield item

@@ -1,6 +1,7 @@
 import scrapy
 from comparateurAuto.items import AutoItem
 import re
+import time
 
 class AutomobileFrSpider(scrapy.Spider):
     name = "automobile_fr"
@@ -112,7 +113,7 @@ class AutomobileFrSpider(scrapy.Spider):
                         model = word
                         item['model'] = model  
             yield item
-                    
+            time.sleep(2)       
 
        
     
