@@ -7,3 +7,4 @@ class ComparateurautoItem(scrapy.Item):
     engine_type = scrapy.Field()
     price = scrapy.Field()
     gearbox = scrapy.Field()
+    brand = scrapy.Field()
