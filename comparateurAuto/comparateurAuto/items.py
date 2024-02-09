@@ -1,6 +1,6 @@
 import scrapy
 
-class ComparateurautoItem(scrapy.Item):
+class AutoItem(scrapy.Item):
     brand = scrapy.Field()
     model = scrapy.Field()
     year = scrapy.Field()
