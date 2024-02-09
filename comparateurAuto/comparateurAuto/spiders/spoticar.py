@@ -1,6 +1,6 @@
 import scrapy
 import json
-from comparateurAuto.items import ComparateurautoItem
+from comparateurAuto.items import AutoItem
 
 
 class SpoticarSpider(scrapy.Spider):
@@ -21,7 +21,7 @@ class SpoticarSpider(scrapy.Spider):
 
     def parse(self, response):
 
-        item = ComparateurautoItem()
+        item = AutoItem()
 
         item["model"] = response.css("#full-vo > div.sidebar.psa-fiche-vo-header-info.col-lg-4.col-md-4.col-sm-12.col-xs-12.sidebar-fiche-vo-reskin.new_financing_gateway > div > div.psa-fiche-vo-infovo.new_financing_gateway > div.psa-fiche-vo-infovo-padding.psa-fiche-vo-infovo-header > div.psa-fiche-vo-infovo-title > h1 > span.title.product-line::text").get().strip()
         item["year"] = response.css("#full-vo > div.sidebar.psa-fiche-vo-header-info.col-lg-4.col-md-4.col-sm-12.col-xs-12.sidebar-fiche-vo-reskin.new_financing_gateway > div > div.content-button-main > div.summary-entries > div:nth-child(1) > div > div.summary-entrie.characteristic-item.field_vo_matriculation_year > span::text").get().strip()
