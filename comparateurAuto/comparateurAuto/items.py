@@ -9,3 +9,5 @@ class ComparateurautoItem(scrapy.Item):
     gearbox = scrapy.Field()
     price = scrapy.Field()
     url = scrapy.Field()
+
+    pass
