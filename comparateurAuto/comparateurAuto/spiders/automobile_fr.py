@@ -2,6 +2,7 @@ import scrapy
 from comparateurAuto.items import AutoItem
 import re
 import time
+import time
 
 class AutomobileFrSpider(scrapy.Spider):
     name = "automobile_fr"
@@ -12,7 +13,7 @@ class AutomobileFrSpider(scrapy.Spider):
         while True:
             yield scrapy.Request(url=base_url.format(page_number), callback=self.parse)
             page_number += 1
-           
+            time.sleep(1)  # Add a delay of 1 second
 
     def parse(self, response):
         item = AutoItem()
@@ -58,11 +59,12 @@ class AutomobileFrSpider(scrapy.Spider):
             for element in section_engine_type:
                 element_to_lower = element.lower()
                 element_split = element_to_lower.split()
-                for word in element_split:
+                element_split_replace = [word.replace(',', '') for word in element_split]
+                for word in element_split_replace:
                     if word in type_motorisation:
                         engine_type = word
                         item['engine_type'] = engine_type
-                for word in element_split:
+                for word in element_split_replace:
                     if word in type_gearbox:
                         gearbox = word
                         item['gearbox'] = gearbox      
@@ -113,7 +115,5 @@ class AutomobileFrSpider(scrapy.Spider):
                         model = word
                         item['model'] = model  
             yield item
-            time.sleep(2)       
-
        
     
